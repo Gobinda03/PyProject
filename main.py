@@ -24,19 +24,32 @@ def processCommand(command):
     command = command.lower()
     print("Processing your command...")
 
+
     # Web Commands
-    sites = {
-        "google": "https://www.google.com",
-        "youtube": "https://www.youtube.com",
-        "linkedin": "https://www.linkedin.com",
-        "facebook": "https://www.facebook.com",
-        "instagram": "https://www.instagram.com"
-    }
-    for site in sites:
-        if f"open {site}" in command:
-            speak(f"Opening {site}")
-            webbrowser.open(sites[site])
-            return
+    if "open" in command:
+        for word in ["please", "could you", "would you", "for me", "open"]:
+            site = command.replace(word, "")
+        site = site.strip()
+
+        newSite = f"https://www.{site}.com"
+        speak(f"Opening {site}")
+        webbrowser.open(newSite)
+        return
+
+
+    # sites = {
+    #     "google": "https://www.google.com",
+    #     "youtube": "https://www.youtube.com",
+    #     "linkedin": "https://www.linkedin.com",
+    #     "facebook": "https://www.facebook.com",
+    #     "instagram": "https://www.instagram.com"
+    # }
+    # for site in sites:
+    #     if f"open {site}" in command:
+    #         speak(f"Opening {site}")
+    #         webbrowser.open(sites[site])
+    #         return
+
 
     # Jokes
     if "joke" in command:
